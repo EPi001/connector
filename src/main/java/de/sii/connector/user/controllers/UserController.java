@@ -1,4 +1,4 @@
-package de.sii.connector.user;
+package de.sii.connector.user.controllers;
 
 import de.sii.connector.config.UserServiceSettings;
 import org.springframework.beans.factory.annotation.Autowired;
