@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
@@ -25,13 +24,11 @@ public class ConnectorApplication {
 	}
 
 	@Bean
-	public RestTemplate getRestTemplate() {
-		RestTemplate restTemplate = restTemplateBuilder
+	public RestTemplate restTemplate() {
+		return restTemplateBuilder
 				.requestFactory(HttpComponentsClientHttpRequestFactory.class)
 				.setReadTimeout(DEFAULT_READ_TIMEOUT)
 				.setConnectTimeout(DEFAULT_CONNECT_TIMEOUT)
 				.build();
-
-		return restTemplate;
 	}
 }
