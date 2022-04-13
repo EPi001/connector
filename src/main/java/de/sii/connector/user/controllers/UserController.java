@@ -1,7 +1,7 @@
 package de.sii.connector.user.controllers;
 
 import de.sii.connector.config.UserServiceSettings;
-import de.sii.connector.user.models.UserEntity;
+import de.sii.connector.user.models.User;
 import de.sii.connector.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class UserController {
     @GetMapping("/user")
     public String getUsers(Model model) {
 
-        List<UserEntity> users = userService.getUsers();
+        List<User> users = userService.getUsers();
 
         return "user";
     }

@@ -11,4 +11,7 @@ import lombok.Data;
 public class UserServiceSettings {
 
     private String url;
+    private int userSize;
+    private int period;
+
 }

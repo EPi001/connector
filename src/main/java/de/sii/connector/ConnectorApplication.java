@@ -1,5 +1,9 @@
 package de.sii.connector;
 
+import de.sii.connector.user.models.User;
+import de.sii.connector.user.repositories.H2Repository;
+import de.sii.connector.user.services.UserService;
+import de.sii.connector.user.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +13,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
+import java.util.List;
 
 @SpringBootApplication
 public class ConnectorApplication {
@@ -31,4 +36,5 @@ public class ConnectorApplication {
 				.setConnectTimeout(DEFAULT_CONNECT_TIMEOUT)
 				.build();
 	}
+
 }
