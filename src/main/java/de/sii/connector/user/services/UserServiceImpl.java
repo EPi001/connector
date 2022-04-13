@@ -26,13 +26,13 @@ public class UserServiceImpl implements UserService {
 
         List<UserResults> userResultsList = randomUserClient.getUsers();
 
-        userResultsList.forEach(x -> {
+        userResultsList.forEach(userResults -> {
             User user = new User();
 
-            user.setName(x.getName().toString());
-            user.setEmail(x.getEmail());
-            user.setGender(x.getGender());
-            user.setLocation(x.getLocation().toString());
+            user.setName(userResults.getName().toString());
+            user.setEmail(userResults.getEmail());
+            user.setGender(userResults.getGender());
+            user.setLocation(userResults.getLocation().toString());
 
             userList.add(user);
         });
