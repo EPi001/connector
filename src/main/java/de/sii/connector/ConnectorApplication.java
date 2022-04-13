@@ -11,6 +11,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 
 import java.time.Duration;
 import java.util.List;
@@ -37,4 +38,13 @@ public class ConnectorApplication {
 				.build();
 	}
 
+	@Bean
+	public SpringResourceTemplateResolver thymeleafTemplateResolver() {
+		SpringResourceTemplateResolver templateResolver
+				= new SpringResourceTemplateResolver();
+		templateResolver.setPrefix("/src/main/resources/templates/user");
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode("HTML");
+		return templateResolver;
+	}
 }

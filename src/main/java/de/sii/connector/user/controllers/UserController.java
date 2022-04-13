@@ -30,7 +30,7 @@ public class UserController {
 
         model.addAttribute("users", users);
 
-        return "user";
+        return "/user";
     }
 
 }
