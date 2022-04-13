@@ -2,13 +2,15 @@ package de.sii.connector.user.clients;
 
 import de.sii.connector.config.UserServiceSettings;
 import de.sii.connector.user.models.RandomUserResult;
+import de.sii.connector.user.models.UserResults;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @Component
 public class RandomUserClientImpl implements RandomUserClient {
@@ -20,7 +22,7 @@ public class RandomUserClientImpl implements RandomUserClient {
     private RestTemplate restTemplate;
 
     @Override
-    public String getUsers() {
+    public List<UserResults> getUsers() {
 
         URI uri = null;
 
@@ -30,8 +32,9 @@ public class RandomUserClientImpl implements RandomUserClient {
             e.printStackTrace();
         }
 
-        restTemplate.getForObject(uri, RandomUserResult.class);
+        ResponseEntity<RandomUserResult> responseEntity = restTemplate.getForEntity(uri, RandomUserResult.class);
 
-        return null;
+        return responseEntity.getBody().getResults();
+        
     }
 }

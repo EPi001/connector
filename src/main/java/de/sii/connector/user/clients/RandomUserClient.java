@@ -1,10 +1,12 @@
 package de.sii.connector.user.clients;
 
-import de.sii.connector.config.UserServiceSettings;
-import org.springframework.beans.factory.annotation.Autowired;
+import de.sii.connector.user.models.RandomUserResult;
+import de.sii.connector.user.models.UserResults;
+
+import java.util.List;
 
 public interface RandomUserClient {
 
-    String getUsers();
+    List<UserResults> getUsers();
 
 }
