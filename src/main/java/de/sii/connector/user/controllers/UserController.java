@@ -28,6 +28,8 @@ public class UserController {
 
         List<User> users = userService.getUsers();
 
+        model.addAttribute("users", users);
+
         return "user";
     }
 

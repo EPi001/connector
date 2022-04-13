@@ -8,6 +8,7 @@ import de.sii.connector.user.repositories.H2Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,11 +22,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUsers() {
+        List<User> userList = new ArrayList<>();
 
         List<UserResults> userResultsList = randomUserClient.getUsers();
 
-        System.out.println(userResultsList.toString());
+        userResultsList.forEach(x -> {
+            User user = new User();
 
-        return null;
+            user.setName(x.getName().toString());
+            user.setEmail(x.getEmail());
+            user.setGender(x.getGender());
+            user.setLocation(x.getLocation().toString());
+
+            userList.add(user);
+        });
+
+        return userList;
     }
 }

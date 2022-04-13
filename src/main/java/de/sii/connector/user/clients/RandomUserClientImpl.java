@@ -35,6 +35,6 @@ public class RandomUserClientImpl implements RandomUserClient {
         ResponseEntity<RandomUserResult> responseEntity = restTemplate.getForEntity(uri, RandomUserResult.class);
 
         return responseEntity.getBody().getResults();
-        
+
     }
 }
