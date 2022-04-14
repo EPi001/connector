@@ -26,11 +26,11 @@ public class UserController {
     @GetMapping("/user")
     public String getUsers(Model model) {
 
-        List<User> users = userService.getUsers();
+        List<User> users = userService.getUsersFromRepository();
 
         model.addAttribute("users", users);
 
-        return "/user";
+        return "user";
     }
 
 }

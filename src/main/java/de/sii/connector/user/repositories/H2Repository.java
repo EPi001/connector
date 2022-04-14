@@ -20,14 +20,15 @@ public class H2Repository {
     }
 
     public void createUser(User user) {
+
         String gender = user.getGender();
         String name = user.getName();
         String location = user.getLocation();
         String email = user.getEmail();
 
-        String sql = " INSERT INTO users (gender, name, location, email) VALUES(" + gender + "," + name + "," + location + "," + email + ")";
+        String sql = "INSERT INTO users (gender, name, location, email) VALUES (?, ?, ?, ?)";
 
-        jdbcTemplate.execute(sql);
+        jdbcTemplate.update(sql, gender, name, location, email);
     }
 
 }

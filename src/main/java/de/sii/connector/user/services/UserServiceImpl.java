@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
     private RandomUserClient randomUserClient;
 
     @Override
-    public List<User> getUsers() {
+    public List<User> getUsersFromApi() {
         List<User> userList = new ArrayList<>();
 
         List<UserResults> userResultsList = randomUserClient.getUsers();
@@ -38,5 +39,30 @@ public class UserServiceImpl implements UserService {
         });
 
         return userList;
+    }
+
+    public List<User> getUsersFromRepository() {
+        List<User> userList = new ArrayList<>();
+
+        Map<String, Object> users = h2Repository.findAllUsers();
+
+        for (String k : users.keySet()) {
+            User user = new User();
+ //           user.setLocation(users.get(k).);
+ //           user.setEmail();
+ //           user.setName();
+ //           user.setGender();
+
+            userList.add(user);
+        }
+
+        return userList;
+    }
+
+    public void createUsers(List<User> userList) {
+        userList.forEach( user -> {
+            h2Repository.createUser(user);
+        });
+
     }
 }
