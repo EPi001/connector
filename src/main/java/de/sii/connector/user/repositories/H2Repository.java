@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -13,10 +15,25 @@ public class H2Repository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Map<String, Object> findAllUsers() {
+    public List<User> findAllUsers() {
+        List<User> userList = new ArrayList<>();
+
         String sql = "SELECT * FROM users ORDER BY id DESC";
 
-        return jdbcTemplate.queryForMap(sql);
+        List<Map<String, Object>> userMapList = jdbcTemplate.queryForList(sql);
+
+        userMapList.stream().forEach(map -> {
+            User user = new User();
+            user.setGender(map.get("gender").toString());
+            user.setEmail(map.get("email").toString());
+            user.setLocation(map.get("location").toString());
+            user.setName(map.get("name").toString());
+            user.setId(Integer.valueOf(map.get("id").toString()));
+
+            userList.add(user);
+        });
+
+        return userList;
     }
 
     public void createUser(User user) {

@@ -42,19 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> getUsersFromRepository() {
-        List<User> userList = new ArrayList<>();
-
-        Map<String, Object> users = h2Repository.findAllUsers();
-
-        for (String k : users.keySet()) {
-            User user = new User();
- //           user.setLocation(users.get(k).);
- //           user.setEmail();
- //           user.setName();
- //           user.setGender();
-
-            userList.add(user);
-        }
+        List<User> userList = h2Repository.findAllUsers();
 
         return userList;
     }
