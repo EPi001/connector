@@ -11,9 +11,9 @@ public class UserCommonErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError(Error e, Model model) {
-        model.addAttribute("message", e.getMessage());
+        model.addAttribute("message", "Something went wrong.");
         model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR);
-        model.addAttribute("error", e.getCause());
+        model.addAttribute("error", "");
 
         return "error";
     }
