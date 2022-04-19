@@ -1,7 +1,6 @@
 package de.sii.connector.user.services;
 
 import de.sii.connector.user.clients.RandomUserClient;
-import de.sii.connector.user.models.RandomUserResult;
 import de.sii.connector.user.models.User;
 import de.sii.connector.user.models.UserResults;
 import de.sii.connector.user.repositories.H2Repository;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,9 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> getUsersFromRepository() {
-        List<User> userList = h2Repository.findAllUsers();
-
-        return userList;
+        return h2Repository.findAllUsers();
     }
 
     public void createUsers(List<User> userList) {
