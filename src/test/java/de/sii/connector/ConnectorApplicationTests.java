@@ -1,6 +1,5 @@
 package de.sii.connector;
 
-import de.sii.connector.user.controllers.UserCommonErrorController;
 import de.sii.connector.user.controllers.UserController;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
