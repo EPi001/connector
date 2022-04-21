@@ -10,7 +10,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class RandomUserClientImpl implements RandomUserClient {
@@ -32,7 +34,13 @@ public class RandomUserClientImpl implements RandomUserClient {
             e.printStackTrace();
         }
 
-        ResponseEntity<RandomUserResult> responseEntity = restTemplate.getForEntity(uri, RandomUserResult.class);
+        Map<String, String> params = new HashMap<>();
+
+        params.put("results", String.valueOf(userServiceSettings.getUserSize()));
+
+        ResponseEntity<RandomUserResult> responseEntity = restTemplate.getForEntity(uri.toString() + "?results={results}", RandomUserResult.class, params);
+
+        System.out.println("retrieved " + responseEntity.getBody().getResults().size() + " items");
 
         return responseEntity.getBody().getResults();
 
