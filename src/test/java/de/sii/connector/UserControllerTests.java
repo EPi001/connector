@@ -19,14 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureJsonTesters
-@AutoConfigureWebClient
+@AutoConfigureWebClient /* Contexts could not be loaded */
 @WebMvcTest(UserController.class)
-@ComponentScan(basePackages = {"de.sii.connector.config"})
+@ComponentScan(basePackages = {"de.sii.connector.config"}) /* Configuration could not be found */
 public class UserControllerTests {
 
     @Autowired
@@ -40,7 +40,10 @@ public class UserControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
-
+/*
+    @Autowired
+    private ServerProperties serverProperties;
+*/
     @Test
     public void getUsersTest() throws Exception {
         List<User> users = new ArrayList<>();
@@ -62,12 +65,14 @@ public class UserControllerTests {
         users.add(user2);
 
         when(userService.getUsersFromRepository()).thenReturn(users);
-        // TODO
-        mockMvc.perform(post("/user/data")
+
+        //int port = serverProperties.getPort();
+
+        mockMvc.perform(get("http://localhost:" + 8080 + "/user/data")
                         .content("")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value(""));
+                .andExpect(jsonPath("$.[0].name").value("Name1"));
 
 
     }
