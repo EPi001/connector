@@ -77,8 +77,6 @@ public class UserControllerTests {
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0].name").value("Name1"));
-
-
     }
 
     @Test
