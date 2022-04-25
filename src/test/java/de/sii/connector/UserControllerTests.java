@@ -2,19 +2,31 @@ package de.sii.connector;
 
 import de.sii.connector.config.UserServiceSettings;
 import de.sii.connector.user.controllers.UserController;
+import de.sii.connector.user.models.User;
 import de.sii.connector.user.services.UserService;
 import de.sii.connector.user.tasks.UserTask;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
+import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-@ExtendWith(SpringExtension.class)
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @AutoConfigureJsonTesters
+@AutoConfigureWebClient
 @WebMvcTest(UserController.class)
+@ComponentScan(basePackages = {"de.sii.connector.config"})
 public class UserControllerTests {
 
     @Autowired
@@ -28,7 +40,7 @@ public class UserControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
-/*
+
     @Test
     public void getUsersTest() throws Exception {
         List<User> users = new ArrayList<>();
@@ -51,16 +63,15 @@ public class UserControllerTests {
 
         when(userService.getUsersFromRepository()).thenReturn(users);
         // TODO
-        mockMvc.perform(post("/user")
+        mockMvc.perform(post("/user/data")
                         .content("")
-                        .contentType(MediaType.TEXT_PLAIN))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value(""));
 
 
     }
 
- */
 /*
     @Test
     public void initTest() {
