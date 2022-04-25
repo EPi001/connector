@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -37,6 +38,9 @@ public class UserControllerTests {
 
     @MockBean
     private UserTask userTask;
+
+    @Autowired
+    private UserController userController;
 
     @Autowired
     private MockMvc mockMvc;
@@ -77,10 +81,13 @@ public class UserControllerTests {
 
     }
 
-/*
     @Test
     public void initTest() {
 
+        /* No errors expected. */
+        assertDoesNotThrow(() -> {
+            userController.init();
+        });
     }
- */
+
 }
