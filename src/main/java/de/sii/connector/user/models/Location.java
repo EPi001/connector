@@ -20,4 +20,7 @@ public class Location {
     @JsonProperty("postcode")
     private Object postcode;
 
+    @JsonProperty("country")
+    private Object country;
+
 }
